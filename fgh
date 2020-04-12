@@ -1,0 +1,102 @@
+from tkinter import *
+
+raiz = Tk()
+raiz.title('program')
+raiz.resizable(0, 0)
+raiz.iconbitmap(r'dd.ico')
+raiz.config(bg='silver', width='650', height='580')
+# -------------------------------
+
+frame1 = Frame(raiz)
+frame1.place(x='8', y='0')
+frame1.config(bg='silver')
+Label(frame1, text=" ", font=('Helvetica', 1, 'bold'), bg='silver').grid(row='1', column='14', columnspan=1)
+Label(frame1, text=" ", font=('Helvetica', 1, 'bold'), bg='silver').grid(row='15', column='1', columnspan=1)
+
+
+Label(frame1, text="buttons", font=('Helvetica', 12), bg='silver').grid(row='1', column='5', columnspan=5)
+
+#VARIABLES
+#------------------------------------------------------
+element1, element2, element3, element4, element5= IntVar(), IntVar(), IntVar(), IntVar(), IntVar()
+
+# ----------------------------------
+
+off_color = "#FFE7B5"
+on_color1 = '#0080BB'
+on_color2 = 'red'
+
+# ----------------------------------
+def funcion_total():
+    list1 = []
+    list2 = []
+
+    for i in range(5):
+
+        # HELPME   HERE
+
+        if opcion.get() == 1:
+            if var[i].get() == 1:
+                boton[i]["bg"] = on_color1
+                list1+=[boton[i]['text']]
+            else:
+                boton[i]["bg"] = off_color
+                if boton[i]['text'] in list1:
+                    list1 -= [boton[i]['text']]
+        else:
+            ######here####
+            pass
+
+        if opcion.get() == 2:
+            if var[i].get() == 1:
+                boton[i]["bg"] = on_color2
+                list2 += [boton[i]['text']]
+
+            else:
+                boton[i]["bg"] = off_color
+                if boton[i]['text'] in list2:
+                    list2 -= [boton[i]['text']]
+        else:
+            pass
+
+
+    def gg():
+        print('')
+        print('    list_final=ran(', list1, ',', list2,  ')')
+
+    buttonprint.config(command=gg)
+
+
+#print
+buttonprint = Button(raiz)
+buttonprint.config(text='PRINT', bg='#FFCE44', relief='solid', width=35, height=5)
+buttonprint.place(x='310', y='490')
+
+
+#radiobuttons
+opcion = IntVar()
+
+var1= Radiobutton(frame1,text='list1',bg=on_color1, relief='solid', width=10, height=2, value=1,variable=opcion)
+var1.grid(row="4", column='7', columnspan='4')
+var2= Radiobutton(frame1,text='list2',bg=on_color2, relief='solid', width=10, height=2, value=2,variable=opcion)
+var2.grid(row="7", column='7', columnspan='4')
+
+#elements
+
+text = ['element1', 'element2', 'element3', 'element4', 'element5' ]
+column = [1,2,3,4,5]
+
+a1r, a2r, a3r, a4r, a5r= Checkbutton(frame1), Checkbutton(frame1), Checkbutton(frame1), Checkbutton(frame1), Checkbutton(frame1)
+
+var = [element1, element2, element3, element4, element5]
+boton = [a1r, a2r, a3r, a4r, a5r]
+
+for i in range(5):
+    boton[i].config(variable=var[i], onvalue=1, offvalue=0, command=funcion_total, text=text[i], width=9, height=2, relief="raised", bg=off_color)
+    boton[i].grid(row="2", column=f'{column[i]}')
+
+
+
+
+raiz.mainloop()
+
